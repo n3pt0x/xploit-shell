@@ -5,6 +5,16 @@ This version significantly improves security by implementing two key enhancement
 
 ## 🔑 Key Features:
 
+Default Features:
+
+- Command history (using arrow keys `↑` `↓`)
+- Auto-completion of command and file names (using `Tab` key)
+- Navigate on the remote file-system (using `cd` command)
+- Upload a file to the server (using upload `<destination_file_name>` command)
+- Download a file from the server (using download `<file_name>` command)
+
+---
+
 ### 1. Bypassing Antivirus Detection
 
 This shell includes techniques to evade detection by antivirus software, making it harder to flag as malicious. These improvements ensure continued functionality even in environments with active security measures.
@@ -19,7 +29,7 @@ Unlike the original P0wny Shell, this version **restricts access** by requiring:
 Users must provide both in the URL to access the shell:
 
 ```bash
-http://yourserver.com/shell.php?h=<encoded_password>&feature=<specific_feature>
+http://example.com/shell.php?h=<encoded_password>
 ```
 
 Without these parameters, access is **completely denied**, ensuring that only authorized users can execute commands.
