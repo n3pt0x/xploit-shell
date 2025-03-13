@@ -43,7 +43,7 @@ echo base64_encode(urlencode('your_password'));
 
 ### 2. Avoiding Antivirus Detection
 
-Since `xploit-shell.php` is **often detected** by security tools, it is recommended to rename the file to something **less obvious**.
+Since `shell.php` is **often detected** by security tools, it is recommended to rename the file to something **less obvious**.
 
 ---
 
